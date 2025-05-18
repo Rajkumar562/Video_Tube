@@ -52,7 +52,7 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next(); // if password is not changed, don't hash it and don't save it
 
-  this.password = bcrypt.hash(this.password, 10); // 10 is the number of rounds
+  this.password = await bcrypt.hash(this.password, 10); // 10 is the number of rounds
   next();
 }); // this function is called just before saving the user to the database
 

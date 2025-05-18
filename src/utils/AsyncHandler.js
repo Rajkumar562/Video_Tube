@@ -4,9 +4,9 @@
 // const AsyncHandler = (func) => async() => {};
 
 // I am taking a func as an argument and returning a function that handles the func we get in argument
-const AsyncHandler = (func) => async (err, req, res, next) => {
+const AsyncHandler = (func) => async (req, res, next) => {
   try {
-    await func(err, req, res, next);
+    await func(req, res, next);
   } catch (error) {
     res.status(error.code || 500).json({
       success: false,
@@ -16,8 +16,8 @@ const AsyncHandler = (func) => async (err, req, res, next) => {
 };
 
 // const AsyncHandler = (requestHandlerFunction) => {
-//   return (err, req, res, next) => {
-//     Promise.resolve(requestHandlerFunction(err, req, res, next)).reject((error) => next(error));
+//   return (req, res, next) => {
+//     Promise.resolve(requestHandlerFunction(req, res, next)).reject((error) => next(error));
 //   };
 // };
 
